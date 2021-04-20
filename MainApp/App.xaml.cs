@@ -9,7 +9,7 @@ using System.Windows;
 namespace MainApp
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Logika interakcji dla klasy App.xaml
     /// </summary>
     public partial class App : Application
     {

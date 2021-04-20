@@ -1,0 +1,15 @@
+D:\Projects\projekt_zespolowy_2\MainApp\bin\Debug\MainApp.exe.config
+D:\Projects\projekt_zespolowy_2\MainApp\bin\Debug\MainApp.exe
+D:\Projects\projekt_zespolowy_2\MainApp\bin\Debug\MainApp.pdb
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.csprojAssemblyReference.cache
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainWindow.g.cs
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\App.g.cs
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp_MarkupCompile.cache
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp_MarkupCompile.lref
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainWindow.baml
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.g.resources
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.Properties.Resources.resources
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.csproj.GenerateResource.cache
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.csproj.CoreCompileInputs.cache
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.exe
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.pdb
