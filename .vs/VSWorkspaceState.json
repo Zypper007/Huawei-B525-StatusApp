@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\MainApp",
-    "\\MainApp\\bin\\Debug",
-    "\\MainApp\\obj\\Release"
+    "\\RouterAPI"
   ],
+  "SelectedNode": "\\RouterAPI\\RouterApi.cs",
   "PreviewInSolutionExplorer": false
 }
