@@ -10,782 +10,101 @@ namespace RouterAPI
 {
 
     // klasa mapuje odpowiedzi na zmienne w c#
+    // zawiera wewnętrzne klasy dla ułatwienia łatwiejszych zapytań
 
-    class RouterStates
+
+    public class RouterStates
     { 
-        private int signalPower;
-        public int SignalPower
+        public class ApiMonitoring
         {
-            get
-            {
-                return signalPower;
-            }
-            internal set
-            {
-                if (value == signalPower)
-                    return;
-
-                signalPower = value;
-                NotifyPropertyChenged();
-            }
+            public int SignalPower { get; internal set; }
+            public int NetworkType { get; internal set; }
+            public int CurrentWifiUser { get; internal set; }
+            public bool RoamingStatus { get; internal set; }
+            public bool SimLockStatus { get; internal set; }
+            public bool SimStatus { get; internal set; }
+            public bool WifiStatus { get; internal set; }
+            public bool FlyMode { get; internal set; }
+            public bool UsbUp { get; internal set; }
+            public string PrimaryDns { get; internal set; }
+            public string SecondaryDns { get; internal set; }
         }
 
-        private int networkType;
-        public int NetworkType
+        public class ApiBasicInformation
         {
-            get
-            {
-                return networkType;
-            }
-            internal set
-            {
-                if (value == networkType)
-                    return;
-
-                networkType = value;
-                NotifyPropertyChenged();
-            }
+            public string DeviceName { get; internal set; }
+            public string SoftwareVersion { get; internal set; }
+            public string WebUIVersion { get; internal set; }
+        }
+        
+        public class ApiPinStatus
+        {
+            public int SimPinTimes { get; internal set; }
+            public int SimPukTimes { get; internal set; }
         }
 
-        private int currentWifiUser;
-        public int CurrentWifiUser
+        public class ApiDeviceSignal
         {
-            get
-            {
-                return currentWifiUser;
-            }
-            internal set
-            {
-                if (value == currentWifiUser)
-                    return;
-
-                currentWifiUser = value;
-                NotifyPropertyChenged();
-            }
+            public int RSRQ { get; internal set; }
+            public int RSRP { get; internal set; }
+            public int RSSI { get; internal set; }
+            public int SINR { get; internal set; }
+            public int RSCP { get; internal set; }
+            public int ECIO { get; internal set; }
+            public int UploadBandwidth { get; internal set; }
+            public int DownloadBandwidth { get; internal set; }
         }
 
-        private int simPinTimes;
-        public int SimPinTimes
+        public class ApiNotifications
         {
-            get
-            {
-                return simPinTimes;
-            }
-            internal set
-            {
-                if (value == simPinTimes)
-                    return;
-
-                simPinTimes = value;
-                NotifyPropertyChenged();
-            }
+            public int UnreadMessage { get; internal set; }
+            public bool SmsStorageFull { get; internal set; }
         }
 
-        private int simPukTimes;
-        public int SimPukTimes
+        public class ApiMonthStatistics
         {
-            get
-            {
-                return simPukTimes;
-            }
-            internal set
-            {
-                if (value == simPukTimes)
-                    return;
-
-                simPukTimes = value;
-                NotifyPropertyChenged();
-            }
+            public ulong CurrentMonthDownload { get; internal set; }
+            public ulong CurrentMonthUpload { get; internal set; }
+            public string MonthLastClearTime { get; internal set; }
         }
 
-        private int rsrq;
-        public int RSRQ
+        public class ApiStartDate
         {
-            get
-            {
-                return rsrq;
-            }
-            internal set
-            {
-                if (value == rsrq)
-                    return;
-
-                rsrq = value;
-                NotifyPropertyChenged();
-            }
+            public int DataLimit { get; internal set; }
+            public int DataLimitAwoke { get; internal set; }
+            public int MonthThreshold { get; internal set; }
+            public int SetMonthData { get; internal set; }
+            public bool TrafficMaxLimit { get; internal set; }
         }
 
-        private int rsrp;
-        public int RSRP
+        public class ApiTrafficStatistics
         {
-            get
-            {
-                return rsrp;
-            }
-            internal set
-            {
-                if (value == rsrp)
-                    return;
-
-                rsrp = value;
-                NotifyPropertyChenged();
-            }
+            public TimeSpan CurrentConnectTime { get; internal set; }
+            public ulong CurrentUpload { get; internal set; }
+            public ulong CurrentDownload { get; internal set; }
+            public int CurrentDownloadRate { get; internal set; }
+            public int CurrentUploadRate { get; internal set; }
+            public ulong TotalUpload { get; internal set; }
+            public ulong TotalDownload { get; internal set; }
+            public TimeSpan TotalConnectTime { get; internal set; }
         }
 
-        private int rssi;
-        public int RSSI
+        public class ApiCurrentPlmn
         {
-            get
-            {
-                return rssi;
-            }
-            internal set
-            {
-                if (value == rssi)
-                    return;
-
-                rssi = value;
-                NotifyPropertyChenged();
-            }
+            public string ProviderFullName { get; internal set; }
+            public string ProviderShortName { get; internal set; }
+            public int ProviderNumeric { get; internal set; }
         }
 
-        private int rscp;
-        public int RSCP
-        {
-            get
-            {
-                return rscp;
-            }
-            internal set
-            {
-                if (value == rscp)
-                    return;
-
-                rscp = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int sinr;
-        public int SINR
-        {
-            get
-            {
-                return sinr;
-            }
-            internal set
-            {
-                if (value == sinr)
-                    return;
-
-                sinr = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int ecio;
-        public int ECIO
-        {
-            get
-            {
-                return ecio;
-            }
-            internal set
-            {
-                if (value == ecio)
-                    return;
-
-                ecio = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int uploadBandwidth;
-        public int UploadBandwidth
-        {
-            get
-            {
-                return uploadBandwidth;
-            }
-            internal set
-            {
-                if (value == uploadBandwidth)
-                    return;
-
-                uploadBandwidth = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int downloadBandwidth;
-        public int DownloadBandwidth
-        {
-            get
-            {
-                return downloadBandwidth;
-            }
-            internal set
-            {
-                if (value == downloadBandwidth)
-                    return;
-
-                downloadBandwidth = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int unreadMessage;
-        public int UnreadMessage
-        {
-            get
-            {
-                return unreadMessage;
-            }
-            internal set
-            {
-                if (value == unreadMessage)
-                    return;
-
-                unreadMessage = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int dataLimit;
-        public int DataLimit
-        {
-            get
-            {
-                return dataLimit;
-            }
-            internal set
-            {
-                if (value == dataLimit)
-                    return;
-
-                dataLimit = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int dataLimitAwoke;
-        public int DataLimitAwoke
-        {
-            get
-            {
-                return dataLimitAwoke;
-            }
-            internal set
-            {
-                if (value == dataLimitAwoke)
-                    return;
-
-                dataLimitAwoke = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int monthThreshold;
-        public int MonthThreshold
-        {
-            get
-            {
-                return monthThreshold;
-            }
-            internal set
-            {
-                if (value == monthThreshold)
-                    return;
-
-                monthThreshold = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int setMonthData;
-        public int SetMonthData
-        {
-            get
-            {
-                return setMonthData;
-            }
-            internal set
-            {
-                if (value == setMonthData)
-                    return;
-
-                setMonthData = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int currentDownloadRate;
-        public int CurrentDownloadRate
-        {
-            get
-            {
-                return currentDownloadRate;
-            }
-            internal set
-            {
-                if (value == currentDownloadRate)
-                    return;
-
-                currentDownloadRate = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int currentUploadRate;
-        public int CurrentUploadRate
-        {
-            get
-            {
-                return currentUploadRate;
-            }
-            internal set
-            {
-                if (value == currentUploadRate)
-                    return;
-
-                currentUploadRate = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private int providerNumeric;
-        public int ProviderNumeric
-        {
-            get
-            {
-                return providerNumeric;
-            }
-            internal set
-            {
-                if (value == providerNumeric)
-                    return;
-
-                providerNumeric = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-
-        private bool roamingStatus;
-        public bool RoamingStatus
-        {
-            get
-            {
-                return roamingStatus;
-            }
-            internal set
-            {
-                if (value == roamingStatus)
-                    return;
-
-                roamingStatus = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private bool trafficMaxLimit;
-        public bool TrafficMaxLimit
-        {
-            get
-            {
-                return trafficMaxLimit;
-            }
-            internal set
-            {
-                if (value == trafficMaxLimit)
-                    return;
-
-                trafficMaxLimit = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private bool smsStorageFull;
-        public bool SmsStorageFull
-        {
-            get
-            {
-                return smsStorageFull;
-            }
-            internal set
-            {
-                if (value == smsStorageFull)
-                    return;
-
-                smsStorageFull = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private bool simLockStatus;
-        public bool SimLockStatus
-        {
-            get
-            {
-                return simLockStatus;
-            }
-            internal set
-            {
-                if (value == simLockStatus)
-                    return;
-
-                simLockStatus = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private bool simStatus;
-        public bool SimStatus
-        {
-            get
-            {
-                return simStatus;
-            }
-            internal set
-            {
-                if (value == simStatus)
-                    return;
-
-                simStatus = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private bool wifiStatus;
-        public bool WifiStatus
-        {
-            get
-            {
-                return wifiStatus;
-            }
-            internal set
-            {
-                if (value == wifiStatus)
-                    return;
-
-                wifiStatus = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private bool flyMode;
-        public bool FlyMode
-        {
-            get
-            {
-                return flyMode;
-            }
-            internal set
-            {
-                if (value == flyMode)
-                    return;
-
-                flyMode = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private bool usbUp;
-        public bool UsbUp
-        {
-            get
-            {
-                return usbUp;
-            }
-            internal set
-            {
-                if (value == usbUp)
-                    return;
-
-                usbUp = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private ulong currentMonthDownload;
-        public ulong CurrentMonthDownload
-        {
-            get
-            {
-                return currentMonthDownload;
-            }
-            internal set
-            {
-                if (value == currentMonthDownload)
-                    return;
-
-                currentMonthDownload = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private ulong currentMonthUpload;
-        public ulong CurrentMonthUpload
-        {
-            get
-            {
-                return currentMonthUpload;
-            }
-            internal set
-            {
-                if (value == currentMonthUpload)
-                    return;
-
-                currentMonthUpload = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private ulong currentUpload;
-        public ulong CurrentUpload
-        {
-            get
-            {
-                return currentUpload;
-            }
-            internal set
-            {
-                if (value == currentUpload)
-                    return;
-
-                currentUpload = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private ulong currentDownload;
-        public ulong CurrentDownload
-        {
-            get
-            {
-                return currentDownload;
-            }
-            internal set
-            {
-                if (value == currentDownload)
-                    return;
-
-                currentDownload = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private ulong totalUpload;
-        public ulong TotalUpload
-        {
-            get
-            {
-                return totalUpload;
-            }
-            internal set
-            {
-                if (value == totalUpload)
-                    return;
-
-                totalUpload = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private ulong totalDownload;
-        public ulong TotalDownload
-        {
-            get
-            {
-                return totalDownload;
-            }
-            internal set
-            {
-                if (value == totalDownload)
-                    return;
-
-                totalDownload = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-
-        private string webUIVersion;
-        public string WebUIVersion
-        {
-            get
-            {
-                return webUIVersion;
-            }
-            internal set
-            {
-                if (value == webUIVersion)
-                    return;
-
-                webUIVersion = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private string softwareVersion;
-        public string SoftwareVersion
-        {
-            get
-            {
-                return softwareVersion;
-            }
-            internal set
-            {
-                if (value == softwareVersion)
-                    return;
-
-                softwareVersion = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private string deviceName;
-        public string DeviceName
-        {
-            get
-            {
-                return deviceName;
-            }
-            internal set
-            {
-                if (value == deviceName)
-                    return;
-
-                deviceName = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private string primaryDns;
-        public string PrimaryDns
-        {
-            get
-            {
-                return primaryDns;
-            }
-            internal set
-            {
-                if (value == primaryDns)
-                    return;
-
-                primaryDns = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private string secondaryDns;
-        public string SecondaryDns
-        {
-            get
-            {
-                return secondaryDns;
-            }
-            internal set
-            {
-                if (value == secondaryDns)
-                    return;
-
-                secondaryDns = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private string providerFullName;
-        public string ProviderFullName
-        {
-            get
-            {
-                return providerFullName;
-            }
-            internal set
-            {
-                if (value == providerFullName)
-                    return;
-
-                providerFullName = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private string providerShortName;
-        public string ProviderShortName
-        {
-            get
-            {
-                return providerShortName;
-            }
-            internal set
-            {
-                if (value == providerShortName)
-                    return;
-
-                providerShortName = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private string monthLastClearTime;
-        public string MonthLastClearTime
-        {
-            get
-            {
-                return monthLastClearTime;
-            }
-            internal set
-            {
-                if (value == monthLastClearTime)
-                    return;
-
-                monthLastClearTime = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private TimeSpan currentConnectTime;
-        public TimeSpan CurrentConnectTime
-        {
-            get
-            {
-                return currentConnectTime;
-            }
-            internal set
-            {
-                if (value == currentConnectTime)
-                    return;
-
-                currentConnectTime = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-        private TimeSpan totalConnectTime;
-        public TimeSpan TotalConnectTime
-        {
-            get
-            {
-                return totalConnectTime;
-            }
-            internal set
-            {
-                if (value == totalConnectTime)
-                    return;
-
-                totalConnectTime = value;
-                NotifyPropertyChenged();
-            }
-        }
-
-
-        private void NotifyPropertyChenged([CallerMemberName] String propName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
+        public ApiMonitoring Monitoring { get; internal set; }
+        public ApiBasicInformation BasicInformation { get; internal set; }
+        public ApiPinStatus PinStatus { get; internal set; }
+        public ApiDeviceSignal DeviceSignal { get; internal set; }
+        public ApiNotifications Notifications { get; internal set; }
+        public ApiMonthStatistics MonthStatistics { get; internal set; }
+        public ApiStartDate StartDate { get; internal set; }
+        public ApiTrafficStatistics TrafficStatistics { get; internal set; }
+        public ApiCurrentPlmn CurrentPlmn { get; internal set; }
     }
 }
 

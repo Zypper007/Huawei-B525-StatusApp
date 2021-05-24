@@ -1,0 +1,2 @@
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\RouterAPI.csprojAssemblyReference.cache
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\RouterAPI.csproj.CoreCompileInputs.cache

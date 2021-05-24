@@ -37,7 +37,7 @@ namespace RouterAPI
 			<cellroam>1</cellroam>
 			<usbup>0</usbup>
 		</response>*/
-		internal readonly string ApiMonitoringStatus = "api/monitoring/status";
+		internal static string ApiMonitoringStatus = "api/monitoring/status";
 
 		// zwraca odpowiedź:
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -46,7 +46,7 @@ namespace RouterAPI
 			<SmsStorageFull>0</SmsStorageFull>
 			<OnlineUpdateStatus>10</OnlineUpdateStatus>
 		</response>*/
-		internal readonly string ApiMonitoringCheckNotifications = "api/monitoring/check-notifications";
+		internal static string ApiMonitoringCheckNotifications = "api/monitoring/check-notifications";
 
 		// zwraca odpowiedź:
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -56,7 +56,7 @@ namespace RouterAPI
 			<MonthDuration>1731261</MonthDuration>
 			<MonthLastClearTime>2021-4-2</MonthLastClearTime>
 		</response>*/
-		internal readonly string ApiMonitoringMonthStatistics = "api/monitoring/month_statistics";
+		internal static string ApiMonitoringMonthStatistics = "api/monitoring/month_statistics";
 
 		// zwraca odpowiedź:
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -71,7 +71,7 @@ namespace RouterAPI
 			<turnoffdataswitch>0</turnoffdataswitch>
 			<turnoffdataflag>0</turnoffdataflag>
 		</response>*/
-		internal readonly string ApiMonitoringStartDate = "api/monitoring/start_date";
+		internal static string ApiMonitoringStartDate = "api/monitoring/start_date";
 
 		// zwraca odpowiedź
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -86,7 +86,7 @@ namespace RouterAPI
 			<TotalConnectTime>1731515</TotalConnectTime>
 			<showtraffic>1</showtraffic>
 		</response> */
-		internal readonly string ApiMonitoringTrafficStatistics = "api/monitoring/traffic-statistics";
+		internal static string ApiMonitoringTrafficStatistics = "api/monitoring/traffic-statistics";
 
 		// zwraca odpowiedź
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -100,7 +100,7 @@ namespace RouterAPI
 			<SoftwareVersion>11.236.01.02.69</SoftwareVersion>
 			<WebUIVersion>21.100.31.00.03</WebUIVersion>
 		</response> */
-		internal readonly string ApiDeviceBasicInformation = "api/device/basic_information";
+		internal static string ApiDeviceBasicInformation = "api/device/basic_information";
 
 		// zwraca odpowiedź
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -131,7 +131,7 @@ namespace RouterAPI
 			<plmn>26001</plmn>
 			<ims>0</ims>
 		</response> */
-		internal readonly string ApiDeviceSignal = "api/device/signal";
+		internal static string ApiDeviceSignal = "api/device/signal";
 
 		// zwraca odpowedz
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -142,7 +142,7 @@ namespace RouterAPI
 			<SimPukTimes>10</SimPukTimes>
 			<Checkboxchecked>1</Checkboxchecked>
 		</response> */
-		internal readonly string ApiPinStatus = "api/pin/status";
+		internal static string ApiPinStatus = "api/pin/status";
 
 		// zwraca odpowiedz 
 		/*<?xml version="1.0" encoding="UTF-8"?>
@@ -154,7 +154,7 @@ namespace RouterAPI
 			<Rat>7</Rat>
 			<Spn></Spn>
 		</response> */
-		internal readonly string ApiNetCurrentPlmn = "api/net/current-plmn";
+		internal static string ApiNetCurrentPlmn = "api/net/current-plmn";
 	}
 }
 
