@@ -94,5 +94,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ReactiveExtensions\ReactiveExtensions.csproj">
+      <Project>{38d0f81b-c8b3-439e-8f90-15404567b63b}</Project>
+      <Name>ReactiveExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RouterAPI\RouterAPI.csproj">
+      <Project>{d3ac6fc1-966e-470a-80cf-032cf0bdf2f7}</Project>
+      <Name>RouterAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

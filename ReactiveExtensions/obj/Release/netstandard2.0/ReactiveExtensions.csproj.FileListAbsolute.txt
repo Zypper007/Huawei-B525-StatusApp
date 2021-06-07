@@ -1,0 +1,8 @@
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\bin\Release\netstandard2.0\ReactiveExtensions.deps.json
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\bin\Release\netstandard2.0\ReactiveExtensions.dll
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\bin\Release\netstandard2.0\ReactiveExtensions.pdb
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\obj\Release\netstandard2.0\ReactiveExtensions.AssemblyInfoInputs.cache
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\obj\Release\netstandard2.0\ReactiveExtensions.AssemblyInfo.cs
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\obj\Release\netstandard2.0\ReactiveExtensions.csproj.CoreCompileInputs.cache
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\obj\Release\netstandard2.0\ReactiveExtensions.dll
+D:\Projects\projekt_zespolowy_2\ReactiveExtensions\obj\Release\netstandard2.0\ReactiveExtensions.pdb

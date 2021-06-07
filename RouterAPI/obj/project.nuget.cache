@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "7mnbmfGAGuPoQnuy2MLrFmhP9pBe1ANpA44Kz4QjvkCfX2wvjWHDy+cK2oig5I0mAc+aKON0wYfgbz+jf+FO9A==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\projekt_zespolowy_2\\RouterAPI\\RouterAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.reactive\\5.0.0\\system.reactive.5.0.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.reactive.core\\5.0.0\\system.reactive.core.5.0.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.reactive.interfaces\\5.0.0\\system.reactive.interfaces.5.0.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.reactive.linq\\5.0.0\\system.reactive.linq.5.0.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.runtime.interopservices.windowsruntime\\4.3.0\\system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
+    "C:\\Users\\Pan Patryk\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}

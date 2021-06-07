@@ -1,0 +1,13 @@
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\netstandard2.0\RouterAPI.AssemblyInfoInputs.cache
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\netstandard2.0\RouterAPI.AssemblyInfo.cs
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\netstandard2.0\RouterAPI.csproj.CoreCompileInputs.cache
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\netstandard2.0\RouterAPI.csprojAssemblyReference.cache
+D:\Projects\projekt_zespolowy_2\RouterAPI\bin\Debug\netstandard2.0\RouterAPI.dll.config
+D:\Projects\projekt_zespolowy_2\RouterAPI\bin\Debug\netstandard2.0\RouterAPI.deps.json
+D:\Projects\projekt_zespolowy_2\RouterAPI\bin\Debug\netstandard2.0\RouterAPI.dll
+D:\Projects\projekt_zespolowy_2\RouterAPI\bin\Debug\netstandard2.0\RouterAPI.pdb
+D:\Projects\projekt_zespolowy_2\RouterAPI\bin\Debug\netstandard2.0\ReactiveExtensions.dll
+D:\Projects\projekt_zespolowy_2\RouterAPI\bin\Debug\netstandard2.0\ReactiveExtensions.pdb
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\netstandard2.0\RouterAPI.csproj.CopyComplete
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\netstandard2.0\RouterAPI.dll
+D:\Projects\projekt_zespolowy_2\RouterAPI\obj\Debug\netstandard2.0\RouterAPI.pdb

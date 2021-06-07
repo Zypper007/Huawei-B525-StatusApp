@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\MainApp",
+    "\\ReactiveExtensions",
     "\\RouterAPI"
   ],
-  "SelectedNode": "\\RouterAPI\\RouterEndPoints.cs",
+  "SelectedNode": "\\MainApp\\MainApp.sln",
   "PreviewInSolutionExplorer": false
 }

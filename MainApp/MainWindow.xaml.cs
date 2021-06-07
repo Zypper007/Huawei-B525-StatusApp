@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ReactiveExtensions;
+using Router;
 
 namespace MainApp
 {
@@ -20,9 +22,17 @@ namespace MainApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private RouterApi routerAPI;
+        private IObserver<RouterStates> observer;
         public MainWindow()
         {
             InitializeComponent();
+
+            routerAPI = new RouterApi();
+            observer = new ConsoleLogObserver<RouterStates>();
+
+            routerAPI.Connect(new Uri("http://192.168.113.1")).Subscribe(observer);
+
         }
     }
 }

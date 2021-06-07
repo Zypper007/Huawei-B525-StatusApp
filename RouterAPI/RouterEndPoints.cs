@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RouterAPI
+namespace Router
 {
 	internal static class RouterEndPoints
 	{
