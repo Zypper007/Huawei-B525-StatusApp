@@ -21,6 +21,7 @@ namespace Router
                 UpdateIntervalDefault = value;
             }
         }
+        public bool IsConnected { get; private set; } = false;
 
         private double UpdateIntervalDefault = 15000;
         // klient http do wykonywana zapytań
@@ -31,6 +32,7 @@ namespace Router
         private DateTime lastTime;
         private Timer UpdatePerSecound;
         private Timer UpdateOncePerWhile;
+        
 
 
         public RouterApi ()
@@ -98,6 +100,8 @@ namespace Router
                 UpdatePerSecound.Start();
 
                 UpdateOncePerWhile = new Timer(UpdateInterval);
+
+                IsConnected = true;
 
                 return routerStates;
             }
@@ -186,8 +190,8 @@ namespace Router
                 WifiStatus = xmlDoc.GetElementsByTagName("WifiStatus")[0].ToBoolean(),
                 FlyMode = xmlDoc.GetElementsByTagName("flymode")[0].ToBoolean(),
                 UsbUp = xmlDoc.GetElementsByTagName("usbup")[0].ToBoolean(),
-                PrimaryDns = xmlDoc.GetElementsByTagName("PrimaryDns")[0].ToString(),
-                SecondaryDns = xmlDoc.GetElementsByTagName("SecondaryDns")[0].ToString()
+                PrimaryDns = xmlDoc.GetElementsByTagName("PrimaryDns")[0].InnerText,
+                SecondaryDns = xmlDoc.GetElementsByTagName("SecondaryDns")[0].InnerText
             };
         }
 
@@ -197,9 +201,9 @@ namespace Router
 
             return new RouterStates.ApiBasicInformation()
             {
-                DeviceName = xmlDoc.GetElementsByTagName("devicename")[0].ToString(),
-                SoftwareVersion = xmlDoc.GetElementsByTagName("SoftwareVersion")[0].ToString(),
-                WebUIVersion = xmlDoc.GetElementsByTagName("WebUIVersion")[0].ToString()
+                DeviceName = xmlDoc.GetElementsByTagName("devicename")[0].InnerText,
+                SoftwareVersion = xmlDoc.GetElementsByTagName("SoftwareVersion")[0].InnerText,
+                WebUIVersion = xmlDoc.GetElementsByTagName("WebUIVersion")[0].InnerText
             };
         }
 
@@ -251,7 +255,7 @@ namespace Router
             {
                 CurrentMonthDownload = xmlDoc.GetElementsByTagName("CurrentMonthDownload")[0].ToUInt64(),
                 CurrentMonthUpload = xmlDoc.GetElementsByTagName("CurrentMonthUpload")[0].ToUInt64(),
-                MonthLastClearTime = xmlDoc.GetElementsByTagName("MonthLastClearTime")[0].ToString()
+                MonthLastClearTime = xmlDoc.GetElementsByTagName("MonthLastClearTime")[0].InnerText
             };
         }
 
@@ -292,8 +296,8 @@ namespace Router
 
             return new RouterStates.ApiCurrentPlmn()
             {
-                ProviderFullName = xmlDoc.GetElementsByTagName("FullName")[0].ToString(),
-                ProviderShortName = xmlDoc.GetElementsByTagName("ShortName")[0].ToString(),
+                ProviderFullName = xmlDoc.GetElementsByTagName("FullName")[0].InnerText,
+                ProviderShortName = xmlDoc.GetElementsByTagName("ShortName")[0].InnerText,
                 ProviderNumeric = xmlDoc.GetElementsByTagName("Numeric")[0].ToInt32()
             };
         }

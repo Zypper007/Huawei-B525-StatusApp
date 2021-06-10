@@ -3,18 +3,19 @@ using System.ComponentModel;
 
 namespace ReactiveExtensions
 {
-    class NotifyProprertyChangeObserver<T> : INotifyPropertyChanged, IObserver<T>
+    public class NotifyProprertyChangeObserver<T> : INotifyPropertyChanged, IObserver<T>
     {
         private T _value;
         public T Value
         {
             get => _value;
-            set
+            private set
             {
                 _value = value;
                 OnPropertyChanged();
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

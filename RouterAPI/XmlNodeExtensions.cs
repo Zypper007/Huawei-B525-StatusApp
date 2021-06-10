@@ -19,8 +19,6 @@ namespace Router
 
         public static int ToInt32(this XmlNode xml) => Convert.ToInt32(xml.EscapeInteger());
 
-        public static string ToString(this XmlNode xml) => xml.InnerText;
-
         public static string EscapeInteger(this XmlNode xml) => xml.InnerText != "" ? Regex.Match(xml.InnerText, @"^-?\d+|\d+").Groups[0].Value : "0";
     }
 }

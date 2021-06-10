@@ -19,3 +19,11 @@ D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.csproj.CoreCompileInpu
 D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.csproj.CopyComplete
 D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.exe
 D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.pdb
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\Signal.g.cs
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\Signal.baml
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\MainApp.SignalResources.resources
+D:\Projects\projekt_zespolowy_2\MainApp\bin\Debug\Hardcodet.NotifyIcon.Wpf.dll
+D:\Projects\projekt_zespolowy_2\MainApp\bin\Debug\System.Drawing.Common.dll
+D:\Projects\projekt_zespolowy_2\MainApp\bin\Debug\Hardcodet.NotifyIcon.Wpf.xml
+D:\Projects\projekt_zespolowy_2\MainApp\obj\Debug\App.baml

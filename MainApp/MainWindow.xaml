@@ -4,9 +4,546 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainApp"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Huawei Status App"
+        MinHeight="500" MinWidth="500"
+        Height="800" Width="500">
     <Grid>
-        
+        <TabControl TabStripPlacement="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#FFCECECE" Foreground="White" BorderBrush="#FFA09E9E">
+            <!-- BASIC TAB -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <Label Content="Basic"/>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,15,0,0" >
+                    <!-- Address Component -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,-10,0,0" VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="15,0,0,0">
+                            <Label Content="Router address" FontFamily="Arial"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox x:Name="AddressInput" 
+                                     HorizontalAlignment="Left" 
+                                     MaxHeight="40"
+                                     MinHeight="40"
+                                     MaxWidth="250"
+                                     MinWidth="250"
+                                     MaxLength="16"
+                                     Text="192.168.8.1" 
+                                     FontFamily="Arial Black" 
+                                     FontSize="24" 
+                                     Padding="10,4,10,4" 
+                                     HorizontalContentAlignment="Center" 
+                                     VerticalContentAlignment="Center" 
+                                     Margin="26,0,0,0" 
+                                     PreviewTextInput="AddressInput_PreviewTextInput" />
+                                <Button x:Name="AddressButton" 
+                                    Width="{Binding ActualHeight, ElementName=AddressButton, Mode=OneWay}" 
+                                    Height="{Binding ActualHeight, ElementName=AddressInput, Mode=OneWay}" 
+                                    HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    FontFamily="{StaticResource Icons}" 
+                                    Content="" FontSize="30" FontWeight="Bold" FontStyle="Normal" 
+                                    Click="AddressButton_Click"/>
+                            </StackPanel>
+                            <Label x:Name="AddressInputOutputInformation" 
+                               MaxWidth="250"
+                               MaxHeight="30"
+                               FontFamily="Arial" 
+                               HorizontalAlignment="Center"/>
+                        </StackPanel>
+                        <local:Signal 
+                        x:Name="SignalControl" 
+                        Power="{Binding Path=Value.Monitoring.SignalPower, IsAsync=True}" 
+                        Type="{Binding Path=Value.Monitoring.NetworkType, IsAsync=True}"
+                        Height="100" Width="120" Margin="60,0,15,0"/>
+                        <Border BorderBrush="Black" 
+                            CornerRadius="15,15,15,15" 
+                            Background="{StaticResource BorderWifiUsersBackgraund}"  
+                            BorderThickness="1" 
+                            Padding="2,2,2,0" 
+                            Width="120" Height="100" Margin="0,0,15,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="7*" />
+                                    <RowDefinition Height="2*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="116"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="&#xF1EB;" 
+                                   FontFamily="{StaticResource Icons}" 
+                                   FontSize="56" 
+                                   HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                   Foreground="{StaticResource WifiUserIconForeground}" 
+                                   Background="{StaticResource WifiUserIconBackground}" />
+                                <Label x:Name="CurrentWifiUsers" 
+                                   Content="{Binding Path=Value.Monitoring.CurrentWifiUser, IsAsync=True}" 
+                                   Style="{StaticResource StylePropertyValue}" 
+                                   HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                                   FontSize="34" Margin="0,0,0,0" Foreground="#FF465ED6" />
+                                <Label Content="Current WiFi users" 
+                                   Style="{StaticResource StylePropertyDesc}" 
+                                   Grid.Row="1" Foreground="White"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                    <!-- END Adress Component-->
+                    <Separator Height="30" Background="Black"/>
+                    <!-- Name Component -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Privder:" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="ProviderName" 
+                           Content="{Binding Path=Value.CurrentPlmn.ProviderFullName, IsAsync=True}" 
+                           Style="{StaticResource StylePropertyValue}" FontSize="24"/>
+
+                    </StackPanel>
+                    <!-- END Name Component -->
+                    <Separator Height="30" Background="Black"/>
+                    <!-- Basic Information Component -->
+                    <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Up Time" Style="{StaticResource StylePropertyDesc}" Grid.Column="0" Grid.Row="0"/>
+                        <Label x:Name="UpTime" 
+                           Content="{Binding Path=Value.TrafficStatistics.CurrentConnectTime, IsAsync=True, Converter={StaticResource TimeSpanConventer}}" 
+                           Style="{StaticResource StylePropertyValue}" 
+                           Grid.Column="1" Grid.Row="0"/>
+
+                        <Label Content="Last Restart Date" Style="{StaticResource StylePropertyDesc}" Grid.Column="0" Grid.Row="1" />
+                        <Label x:Name="LastRestartDate" 
+                           Content="{Binding Path=Value.MonthStatistics.MonthLastClearTime, IsAsync=True, Converter={StaticResource DateConventer}}" 
+                           Style="{StaticResource StylePropertyValue}" 
+                           Grid.Column="1" Grid.Row="1"/>
+
+                        <Label Content="Current Download" Grid.Column="2" Grid.Row="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="CurrentDownload" 
+                           Content="{Binding Path=Value.TrafficStatistics.CurrentDownload, IsAsync=True, Converter={StaticResource BytesConventer}}" 
+                           Grid.Column="3" Grid.Row="0" 
+                           Style="{StaticResource StylePropertyValue}"/>
+
+                        <Label Content="Current Upload" Grid.Column="2" Grid.Row="1" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="CurrentUpload" 
+                           Content="{Binding Path=Value.TrafficStatistics.CurrentUpload, IsAsync=True, Converter={StaticResource BytesConventer}}" 
+                           Grid.Column="3" Grid.Row="1" 
+                           Style="{StaticResource StylePropertyValue}"></Label>
+                    </Grid>
+                    <!-- END Basic Information Component -->
+                    <Separator Height="50" Background="Black"/>
+                    <!-- Data component -->
+                    <Grid Margin="0,0,0,15" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Is Set Traffic Max Limit:" Grid.Row="0" Grid.Column="0" Style="{StaticResource StylePropertyDesc}" VerticalAlignment="Center" Margin="0,0,0,20"/>
+                        <ToggleButton x:Name="TrafficMaxLimit" IsChecked="{Binding Path=Value.StartDate.TrafficMaxLimit, IsAsync=True, Mode=OneWay}" Grid.Column="1" Style="{StaticResource SwitchTypeToggleButton}" HorizontalAlignment="Left" Margin="2,2,2,20"/>
+
+                        <Label Content="Threshold per Month:" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="MonthThreshold" Content="{Binding Path=Value.StartDate.MonthThreshold, IsAsync=True}" Grid.Row="1" Grid.Column="1" Style="{StaticResource StylePropertyValue}"/>
+
+                        <Label Content="Set Data Limit:" Grid.Row="2" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="SetDataLimit" Content="{Binding Path=Value.StartDate.SetMonthData}" Grid.Row="2" Grid.Column="1" Style="{StaticResource StylePropertyValue}"/>
+
+                        <Label Content="Data Limit" Grid.Row="1" Grid.Column="2" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="DataLimit" Content="{Binding Path=Value.StartDate.DataLimit, IsAsync=True}" Grid.Row="1" Grid.Column="3" Style="{StaticResource StylePropertyValue}"/>
+
+                        <Label Content="Data Limit Awoke" Grid.Row="2" Grid.Column="2" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="DataLimitAwoke" Content="{Binding Path=Value.StartDate.DataLimitAwoke, IsAsync=True}" Grid.Row="2" Grid.Column="3" Style="{StaticResource StylePropertyValue}"/>
+                    </Grid>
+                    <!-- END Data component -->
+                </StackPanel>
+            </TabItem>
+            <!-- END BASIC TAB -->
+            <!-- ROUTER TAB-->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <Label Content="Router"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Name:" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="DeviceName" 
+                           Content="{Binding Path=Value.BasicInformation.DeviceName, IsAsync=True}" 
+                           Style="{StaticResource StylePropertyValue}" Margin="20,25,0,0" FontSize="36"/>
+                    </StackPanel>
+                    <Separator Height="50"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Web Ui Version:" Grid.Row="0" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="WebUiVersion" 
+                           Content="{Binding Path=Value.BasicInformation.WebUIVersion, IsAsync=True}" 
+                           Grid.Column="1" Grid.Row="0" 
+                           Style="{StaticResource StylePropertyValue}"/>
+
+                        <Label Content="Software Version" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="SoftwareVersion" 
+                           Content="{Binding Path=Value.BasicInformation.WebUIVersion, IsAsync=True}" 
+                           Grid.Column="1" Grid.Row="1" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                    </Grid>
+                    <Separator Height="50"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Sim Status" Grid.Row="0" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <ToggleButton x:Name="SimStatus" 
+                                  IsChecked="{Binding Path=Value.Monitoring.SimStatus, IsAsync=True, Mode=OneWay}"
+                                  Grid.Row="0" Grid.Column="1" 
+                                  HorizontalAlignment="Left" 
+                                  Style="{StaticResource SwitchTypeToggleButton}" />
+
+                        <Label Content="Fly Mode" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <ToggleButton x:Name="FlyMode" 
+                                  IsChecked="{Binding Path=Value.Monitoring.FlyMode, IsAsync=True, Mode=OneWay}"
+                                  Grid.Row="1" Grid.Column="1" 
+                                  HorizontalAlignment="Left" 
+                                  Style="{StaticResource SwitchTypeToggleButton}"/>
+
+                        <Label Content="WIFI Status" Grid.Row="2" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <ToggleButton x:Name="WifiStatus" 
+                                  IsChecked="{Binding Path=Value.Monitoring.WifiStatus, IsAsync=True, Mode=OneWay}"
+                                  Grid.Row="2" Grid.Column="1" 
+                                  HorizontalAlignment="Left" 
+                                  Style="{StaticResource SwitchTypeToggleButton}"/>
+
+                        <Label Content="USB Up" Grid.Row="3" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <ToggleButton x:Name="USBUp" 
+                                  IsChecked="{Binding Path=Value.Monitoring.UsbUp, IsAsync=True, Mode=OneWay}"
+                                  Grid.Row="3" Grid.Column="1" 
+                                  HorizontalAlignment="Left" 
+                                  Style="{StaticResource SwitchTypeToggleButton}"/>
+
+
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <!-- END ROUTER TAB -->
+            <!-- SIGNAL TAB -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <Label Content="Signal"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,25,0,26">
+                    <Grid Margin="30,0,30,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="RSRQ:" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="RSSI:" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="RSCP:" Grid.Row="2" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="SINR:" Grid.Row="3" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="EC\IO:" Grid.Row="4" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+
+                        <Label x:Name="RSRQ" 
+                           Content="{Binding Path=Value.DeviceSignal.RSRQ, IsAsync=True, Converter={StaticResource RSRQconventer}, ConverterParameter={x:Static local:SignalEnum.Value}}" 
+                           Style="{StaticResource StylePropertyValue}" 
+                           Grid.Column="1"/>
+                        <Label x:Name="RSSI" 
+                           Content="{Binding Path=Value.DeviceSignal.RSSI, IsAsync=True, Converter={StaticResource RSSIconventer}, ConverterParameter={x:Static local:SignalEnum.Value}}"
+                           Grid.Row="1" Grid.Column="1"
+                           Style="{StaticResource StylePropertyValue}" />
+                        <Label x:Name="RSCP" 
+                           Content="{Binding Path=Value.DeviceSignal.RSCP, IsAsync=True, Converter={StaticResource RSCPconventer}, ConverterParameter={x:Static local:SignalEnum.Value}}" 
+                           Grid.Row="2" Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}" />
+                        <Label x:Name="SINR" 
+                           Content="{Binding Path=Value.DeviceSignal.SINR, IsAsync=True, Converter={StaticResource SINRconventer}, ConverterParameter={x:Static local:SignalEnum.Value}}" 
+                           Grid.Row="3" Grid.Column="1"
+                           Style="{StaticResource StylePropertyValue}" />
+                        <Label x:Name="ECIO" 
+                           Content="{Binding Path=Value.DeviceSignal.ECIO, IsAsync=True, Converter={StaticResource ECIOconventer}, ConverterParameter={x:Static local:SignalEnum.Value}}" 
+                           Grid.Row="4" Grid.Column="1"
+                           Style="{StaticResource StylePropertyValue}"/>
+
+                        <Border Grid.Row="0" Grid.Column="2" Margin="0,2,0,2"
+                            Background="{Binding Path=Value.DeviceSignal.RSRQ, IsAsync=True, Converter={StaticResource RSRQconventer}, ConverterParameter={x:Static local:SignalEnum.Color}}" >
+                            <TextBlock Text="{Binding Path=Value.DeviceSignal.RSRQ, IsAsync=True, Converter={StaticResource RSRQconventer}, ConverterParameter={x:Static local:SignalEnum.Type}}" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="18" FontWeight="Normal" FontFamily="Arial"/>
+                        </Border>
+                        <Border Grid.Row="1" Grid.Column="2" Margin="0,2,0,2"
+                            Background="{Binding Path=Value.DeviceSignal.RSSI, IsAsync=True, Converter={StaticResource RSSIconventer}, ConverterParameter={x:Static local:SignalEnum.Color}}" >
+                            <TextBlock Text="{Binding Path=Value.DeviceSignal.RSSI, IsAsync=True, Converter={StaticResource RSSIconventer}, ConverterParameter={x:Static local:SignalEnum.Type}}" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="18" FontWeight="Normal" FontFamily="Arial"/>
+                        </Border>
+                        <Border Grid.Row="2" Grid.Column="2" Margin="0,2,0,2" 
+                            Background="{Binding Path=Value.DeviceSignal.RSCP, IsAsync=True, Converter={StaticResource RSCPconventer}, ConverterParameter={x:Static local:SignalEnum.Color}}" >
+                            <TextBlock Text="{Binding Path=Value.DeviceSignal.RSCP, IsAsync=True, Converter={StaticResource RSCPconventer}, ConverterParameter={x:Static local:SignalEnum.Type}}" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="18" FontWeight="Normal" FontFamily="Arial"/>
+                        </Border>
+                        <Border Grid.Row="3" Grid.Column="2" Margin="0,2,0,2" 
+                            Background="{Binding Path=Value.DeviceSignal.SINR, IsAsync=True, Converter={StaticResource SINRconventer}, ConverterParameter={x:Static local:SignalEnum.Color}}" >
+                            <TextBlock Text="{Binding Path=Value.DeviceSignal.SINR, IsAsync=True, Converter={StaticResource SINRconventer}, ConverterParameter={x:Static local:SignalEnum.Type}}" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="18" FontWeight="Normal" FontFamily="Arial"/>
+                        </Border>
+                        <Border Grid.Row="4" Grid.Column="2" Margin="0,2,0,2"
+                            Background="{Binding Path=Value.DeviceSignal.ECIO, IsAsync=True, Converter={StaticResource ECIOconventer}, ConverterParameter={x:Static local:SignalEnum.Color}}" >
+                            <TextBlock Text="{Binding Path=Value.DeviceSignal.ECIO, IsAsync=True, Converter={StaticResource ECIOconventer}, ConverterParameter={x:Static local:SignalEnum.Type}}" 
+                                   Foreground="White" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="18" FontWeight="Normal" FontFamily="Arial"/>
+                        </Border>
+                    </Grid>
+                    <Separator Height="50"/>
+                    <Grid Margin="30,0,30,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Download Bandwith:" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Upload Bandwith:" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+
+                        <Label x:Name="DownloadBandwith" 
+                           Content="{Binding Path=Value.DeviceSignal.DownloadBandwidth, IsAsync=True, Converter={StaticResource MHZconventer}}" 
+                           Style="{StaticResource StylePropertyValue}" Grid.Column="1" />
+                        <Label x:Name="UploadBandwith" 
+                           Content="{Binding Path=Value.DeviceSignal.UploadBandwidth, IsAsync=True, Converter={StaticResource MHZconventer}}" 
+                           Grid.Row="1" Grid.Column="1"
+                           Style="{StaticResource StylePropertyValue}"/>
+
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <!-- END SIGNAL TAB -->
+            <!-- SIM TAB -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <Label Content="Sim"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel Orientation="Vertical" Margin="0,15,0,15">
+                    <Grid Margin="30,0,30,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Roaming Status:" Grid.Row="0" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Simlock Status:" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="SMS Stronge Full:" Grid.Row="2" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+
+                        <ToggleButton x:Name="RoamingStatus" 
+                                  IsChecked="{Binding Path=Value.Monitoring.RoamingStatus, IsAsync=True, Mode=OneWay}"
+                                  Grid.Row="0" Grid.Column="1" 
+                                  HorizontalAlignment="Left" 
+                                  Style="{StaticResource SwitchTypeToggleButton}"/>
+                        <ToggleButton x:Name="SimlockStatus" 
+                                  IsChecked="{Binding Path=Value.Monitoring.SimLockStatus, IsAsync=True, Mode=OneWay}"
+                                  Grid.Row="1" Grid.Column="1" 
+                                  HorizontalAlignment="Left" 
+                                  Style="{StaticResource SwitchTypeToggleButton}"/>
+                        <ToggleButton x:Name="SmsStrongeFull" 
+                                  Grid.Row="2" Grid.Column="1" 
+                                  IsChecked="{Binding Path=Value.Notifications.SmsStorageFull, IsAsync=True, Mode=OneWay}" 
+                                  HorizontalAlignment="Left" 
+                                  Style="{StaticResource SwitchTypeToggleButton}"/>
+                    </Grid>
+
+                    <Separator Height="50"/>
+
+                    <Grid Margin="30,0,30,0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Unread Message:" Grid.Row="0" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Pin Times:" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Puk Times:" Grid.Row="2" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+
+                        <Label x:Name="UnreadMessage" 
+                           Content="{Binding Path=Value.Notifications.UnreadMessage, IsAsync=True}" 
+                           Grid.Row="0" Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                        <Label x:Name="SimPinTimes" 
+                           Content="{Binding Path=Value.PinStatus.SimPinTimes, IsAsync=True}" 
+                           Grid.Row="1" Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                        <Label x:Name="SimPukTimes" 
+                           Content="{Binding Path=Value.PinStatus.SimPukTimes, IsAsync=True}" 
+                           Grid.Row="2" Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+            <!-- END SIM TAB -->
+            <!-- ADVANCED TAB -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel >
+                        <Label Content="Advanced"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <StackPanel Orientation="Vertical" Margin="0,15,0,15">
+                    <StackPanel Orientation="Horizontal" Margin="30,0,30,0">
+                        <Label Content="Total Time Connection:" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="TotalTimeConnection" 
+                           Content="{Binding Path=Value.TrafficStatistics.TotalConnectTime, IsAsync=True, Converter={StaticResource TimeSpanConventer}}" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                    </StackPanel>
+                    <Separator Height="30"/>
+                    <Grid Margin="30,0,30,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Poriver Short Name:" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="ProviderShortName" Grid.Column="1" 
+                           Content="{Binding Path=Value.CurrentPlmn.ProviderShortName, IsAsync=True}" 
+                           Style="{StaticResource StylePropertyValue}" />
+                        <Label Content="Provider Numeric:" Grid.Column="2" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="ProviderNumeric" 
+                           Content="{Binding Path=Value.CurrentPlmn.ProviderNumeric, IsAsync=True}" 
+                           Grid.Column="3" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                    </Grid>
+                    <Separator Height="30"/>
+                    <Grid Margin="30,0,30,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Primary DNS:" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="PrimaryDNS" 
+                           Content="{Binding Path=Value.Monitoring.PrimaryDns, IsAsync=True}" 
+                           Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}" />
+                        <Label Content="Secondary DNS:" Grid.Column="2" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label x:Name="SecondaryDNS" 
+                           Content="{Binding Path=Value.Monitoring.SecondaryDns, IsAsync=True}" 
+                           Grid.Column="3" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                    </Grid>
+                    <Separator Height="30"/>
+                    <Grid Margin="30,0,30,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Current Download Rate:" Grid.Row="0" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Current Month Download:" Grid.Row="1" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Total Download:" Grid.Row="2" Grid.Column="0" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Current Upload Rate:" Grid.Row="0" Grid.Column="2" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Current Month Upload:" Grid.Row="1" Grid.Column="2" Style="{StaticResource StylePropertyDesc}"/>
+                        <Label Content="Total Upload:" Grid.Row="2" Grid.Column="2" Style="{StaticResource StylePropertyDesc}"/>
+
+                        <Label x:Name="CurrentDownloadRate" 
+                           Content="{Binding Path=Value.TrafficStatistics.CurrentDownloadRate, Converter={StaticResource BytesPerSecondConventer}}" 
+                           Grid.Row="0" Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                        <Label x:Name="CurrentMonthDownload" 
+                           Content="{Binding Path=Value.MonthStatistics.CurrentMonthDownload, IsAsync=True, Converter={StaticResource BytesConventer}}" 
+                           Grid.Row="1" Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                        <Label x:Name="TotalDownload" 
+                           Content="{Binding Path=Value.TrafficStatistics.TotalDownload, IsAsync=True, Converter={StaticResource BytesConventer}}" 
+                           Grid.Row="2" Grid.Column="1" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                        <Label x:Name="CurrentUploadRate" 
+                           Content="{Binding Path=Value.TrafficStatistics.CurrentUploadRate, Converter={StaticResource BytesPerSecondConventer}}" 
+                           Grid.Row="0" Grid.Column="3" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                        <Label x:Name="CurrentMonthUpload" 
+                           Content="{Binding Path=Value.MonthStatistics.CurrentMonthUpload, IsAsync=True, Converter={StaticResource BytesConventer}}" 
+                           Grid.Row="1" Grid.Column="3" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                        <Label x:Name="TotalUpload" 
+                           Content="{Binding Path=Value.TrafficStatistics.TotalUpload, IsAsync=True, Converter={StaticResource BytesConventer}}" 
+                           Grid.Row="2" Grid.Column="3" 
+                           Style="{StaticResource StylePropertyValue}"/>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+
+        </TabControl>
+        <tb:TaskbarIcon x:Name="TaskbarIcon" >
+        </tb:TaskbarIcon>
     </Grid>
 </Window>
